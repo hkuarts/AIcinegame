@@ -335,7 +335,29 @@
       z-index:0;
       transition:transform .05s linear;
     }
-  </style>
+  
+/* SCROLL REVEAL ANIMATION */
+.reveal{
+  opacity:0;
+  transform:translateY(40px) scale(.98);
+  transition:all .9s cubic-bezier(.16,1,.3,1);
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* CTA PULSE */
+.btn-submit{
+  animation:pulseGlow 3s infinite;
+}
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 10px rgba(0,255,200,.3);}
+  50%{box-shadow:0 0 40px rgba(0,255,200,.9);}
+  100%{box-shadow:0 0 10px rgba(0,255,200,.3);}
+}
+
+</style>
 </head>
 <body>
 
@@ -361,7 +383,7 @@
 
 <!-- ========= NEW SECTIONS (with IDs for nav) ========= -->
 <!-- 🎬 Festival Theme -->
-<div class="section-block" id="theme">
+<div class="section-block reveal" id="theme">
   <div class="section-icon">🎬</div>
   <h2 class="section-title">Festival Theme</h2>
   <div class="desc-text">
@@ -373,7 +395,7 @@
 </div>
 
 <!-- 🌐 About the Festival -->
-<div class="section-block" id="about">
+<div class="section-block reveal" id="about">
   <div class="section-icon">🌐</div>
   <h2 class="section-title">About the Festival</h2>
   <div class="desc-text" style="max-width:800px;">
@@ -384,7 +406,7 @@
 </div>
 
 <!-- ✨ Programme Highlights -->
-<div class="section-block" id="highlights">
+<div class="section-block reveal" id="highlights">
   <div class="section-icon">✨</div>
   <h2 class="section-title">Programme Highlights</h2>
   <div class="grid-2col">
@@ -397,7 +419,7 @@
 </div>
 
 <!-- 🗂️ Tracks & Formats -->
-<div class="section-block" id="tracks">
+<div class="section-block reveal" id="tracks">
   <div class="section-icon">🗂️</div>
   <h2 class="section-title">Tracks & Formats</h2>
   <div class="grid-3col">
@@ -417,7 +439,7 @@
 </div>
 
 <!-- 📩 Submission -->
-<div class="section-block" id="submission">
+<div class="section-block reveal" id="submission">
   <div class="section-icon">📩</div>
   <h2 class="section-title">Submission</h2>
 
@@ -472,7 +494,7 @@
 </div>
 
 <!-- 🗓️ Timeline -->
-<div class="section-block" id="timeline">
+<div class="section-block reveal" id="timeline">
   <div class="section-icon">🗓️</div>
   <h2 class="section-title">Timeline</h2>
   <div class="timeline-grid">
@@ -483,7 +505,7 @@
     <div class="timeline-item"><div class="date">7 May 2026</div><div class="event">Festival & Showcase</div></div>
   </div>
   <div style="text-align:center; margin: 60px 0 20px;">
-    <a href="#" class="btn-submit">Submit Your Work</a>
+    <a href="https://forms.gle/uXZG63AUQsLYcKb29" class="btn-submit" target="_blank">Submit Your Work</a>
   </div>
 </div>
 
@@ -494,7 +516,7 @@
 </footer>
 
 <!-- floating button (consistent) -->
-<a href="#" class="floating-btn">Submit Your Work</a>
+<a href="https://forms.gle/uXZG63AUQsLYcKb29" class="floating-btn" target="_blank">Submit Your Work</a>
 
 <script>
   /* PARTICLE CINEMA BACKGROUND */
@@ -554,6 +576,21 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
+
+/* SCROLL REVEAL */
+const reveals = document.querySelectorAll('.reveal');
+function revealOnScroll(){
+  const trigger = window.innerHeight * 0.85;
+  reveals.forEach(el=>{
+    const top = el.getBoundingClientRect().top;
+    if(top < trigger){
+      el.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
 </script>
 
 </body>
